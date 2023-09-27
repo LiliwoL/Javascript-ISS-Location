@@ -43,7 +43,7 @@ map.addControl(new L.Control.Fullscreen({
 
 function getISSLocation()
 {
-    fetch('http://api.open-notify.org/iss-now.json')
+    fetch('https://api.open-notify.org/iss-now.json')
         .then( response => response.json() )
         .then( data => {
             // Debug
