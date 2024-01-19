@@ -5,12 +5,12 @@ window.currentISSMarker;
 
 // Center
 // FR: définit la position initiale sur la carte: Coordonnées de la Rochelle
-map.setView([46.157302200462, -1.15357247663001], 1);
+map.setView([46.157302200462, -1.15357247663001], 2);
 
 
 // FR: Initialisation la carte en ajoutant une couche de tuile
 const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 20, // le valeur maximum permetant de zoomé
+    maxZoom: 20, // le valeur maximum permetant de zoomer
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>' // copyright
 }).addTo(map);
 
@@ -43,7 +43,7 @@ map.addControl(new L.Control.Fullscreen({
 
 function getISSLocation()
 {
-    fetch('https://api.open-notify.org/iss-now.json')
+    fetch('http://api.open-notify.org/iss-now.json')
         .then( response => response.json() )
         .then( data => {
             // Debug
@@ -84,4 +84,4 @@ function updateISSMarker( iss_position )
 }
 
 // timer mise à jour
-const intervalID = setInterval(getISSLocation, 1000, );
+const intervalID = setInterval(getISSLocation, 5000, );
