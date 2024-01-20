@@ -43,12 +43,7 @@ map.addControl(new L.Control.Fullscreen({
 
 function getISSLocation()
 {
-    fetch('http://api.open-notify.org/iss-now.json', {
-        mode: 'cors',
-        headers: {
-            'Access-Control-Allow-Origin':'*'
-        }
-    })
+    fetch('http://api.open-notify.org/iss-now.json')
         .then( response => response.json() )
         .then( data => {
             // Debug
