@@ -1,6 +1,7 @@
 // Create a new map with a fullscreen button:
 window.map = new L.Map('map');
 
+// FR: variable globale pour stocker le marker de l'ISS
 window.currentISSMarker;
 
 // Center
@@ -14,7 +15,7 @@ const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>' // copyright
 }).addTo(map);
 
-// FR: initialisation d'une icone marker personnalisé
+// FR: initialisation d'une icone marker personnalisée
 const LeafIcon = L.Icon.extend({
     options: {
         // FR: taille de l'icône
@@ -41,13 +42,24 @@ map.addControl(new L.Control.Fullscreen({
     }
 }));
 
+/**
+ * FR: fonction pour récupérer la position de l'ISS
+ */
 function getISSLocation()
 {
+    // Loading
+    let loading = document.getElementById("loading");
+    loading.style.display = "block";
+
     fetch('http://api.open-notify.org/iss-now.json')
+        
         .then( response => response.json() )
         .then( data => {
+            // Hide loading
+            loading.style.display = "none";
+
             // Debug
-            console.log(data.iss_position.latitude);
+            console.log("🗺️ Position de l'ISS: " + data.iss_position.latitude);
             output = false;
 
             let map = window.map;
@@ -65,6 +77,10 @@ function getISSLocation()
         });
 }
 
+/**
+ * FR: fonction pour mettre à jour le marker de l'ISS
+ * @param {*} iss_position 
+ */
 function updateISSMarker( iss_position )
 {
     let longitude = iss_position.longitude;
@@ -80,7 +96,8 @@ function updateISSMarker( iss_position )
         {icon: window.IssIcon}
     )
         .addTo(map)
-        .bindPopup("Lat: " + latitude + "<br>Lon: " + longitude).openPopup();
+        // FR: ajout d'une popup avec les coordonnées de l'ISS
+        .bindPopup("<b>Position de l'ISS</b><br>Latitude: " + latitude + "<br>Longitude: " + longitude).openPopup();
 }
 
 // timer mise à jour
