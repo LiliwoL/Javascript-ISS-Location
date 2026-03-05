@@ -17,12 +17,14 @@ Cette carte doit se mettre à jour régulièrement.
 - http://api.open-notify.org/
 - http://api.open-notify.org/iss-now.json
 
-# Librairie à utiliser
+# Librairies à utiliser
 
 - Leaflet
     https://leafletjs.com/
--Leaflet Fullscreen
+- Leaflet Fullscreen
     https://github.com/Leaflet/Leaflet.fullscreen
+* Bootstrap, Bulma, Tailwind au choix
+
 
 # Utilisation
 
