@@ -51,7 +51,7 @@ function getISSLocation()
     let loading = document.getElementById("loading");
     loading.style.display = "block";
 
-    fetch('https://api.open-notify.org/iss-now.json')
+    fetch('http://api.open-notify.org/iss-now.json')
         
         .then( response => response.json() )
         .then( data => {
